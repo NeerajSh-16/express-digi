@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 const app = express();
 app.use(express.json())
@@ -22,13 +22,13 @@ app.get('/teas', (req, res) => {
 })
 //get a particular tea with an id
 app.get('/teas/:id',(req, res) => {
-    const tea = teaData.findIndex( t => t.id === parseInt(req.params.id))
+    const tea = teaData.find( t => t.id === parseInt(req.params.id))
     //if you say 'teas/:superman' then you have look for req.params.superman
     //we used parseInt b/c anything that comes from the url is in the string format
     if(!tea){
         res.status(404).send('Tea not found')
     }else{
-        res.send(200).send(tea);
+        res.status(200).send(tea);
     }
 })
 //update
